@@ -1,0 +1,7 @@
+{
+  "name": "AI Passport Pro",
+  "description": "Professional passport photo layout generator with integrated AI image editing powered by Gemini 2.5 Flash.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
