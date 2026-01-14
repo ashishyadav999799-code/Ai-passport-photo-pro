@@ -42,7 +42,8 @@ const App: React.FC = () => {
     setError(null);
 
     try {
-      const targetPrompt = "Auto-enhance this portrait to 4K resolution quality. Remove background and set a perfect solid professional blue background. Sharpen the face and ensure perfect centering for a passport photo (35mm x 45mm style).";
+      // Updated prompt based on user feedback: Keep shape exact, don't make it thin.
+      const targetPrompt = "Enhance this photo to 4K resolution. KEEP THE ORIGINAL FACE SHAPE EXACTLY. DO NOT make the person look thinner. Only remove the background (make it solid blue) and cut to passport size while maintaining original proportions perfectly.";
       const result = await editImageWithAI(photoState.originalUrl, targetPrompt);
       setPhotoState(prev => ({ ...prev, editedUrl: result, isProcessing: false }));
       setViewMode(ViewMode.PREVIEW);
@@ -62,7 +63,6 @@ const App: React.FC = () => {
 
     setIsDownloading(true);
     try {
-      // Capture the element at high scale for better quality
       const canvas = await html2canvas(element, {
         scale: 3, 
         useCORS: true,
@@ -118,7 +118,7 @@ const App: React.FC = () => {
           </div>
           <div className="hidden sm:block">
             <h1 className="text-xl font-black text-slate-900 leading-none">Passport <span className="text-blue-600">4K</span></h1>
-            <p className="text-[10px] text-slate-400 font-bold tracking-widest mt-1 uppercase">Professional AI Engine</p>
+            <p className="text-[10px] text-slate-400 font-bold tracking-widest mt-1 uppercase">NO-DISTORTION ENGINE</p>
           </div>
         </div>
         
@@ -186,8 +186,8 @@ const App: React.FC = () => {
               <i className="fas fa-cloud-upload-alt"></i>
             </div>
             <div className="text-center">
-              <p className="text-slate-900 font-black text-lg">Upload Your Portrait</p>
-              <p className="text-slate-400 text-[10px] font-bold tracking-widest uppercase mt-1">Select an image to begin processing</p>
+              <p className="text-slate-900 font-black text-lg">Upload Photo</p>
+              <p className="text-slate-400 text-[10px] font-bold tracking-widest uppercase mt-1">Keep original face shape • 4K Quality</p>
             </div>
           </div>
         ) : (
@@ -195,7 +195,7 @@ const App: React.FC = () => {
             {viewMode === ViewMode.EDITOR ? (
               <div className="flex flex-col md:flex-row gap-8 items-center justify-center no-print">
                 <div className="flex flex-col items-center gap-4">
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Original Input</p>
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Original</p>
                   <div className="w-[35mm] h-[45mm] bg-slate-200 rounded-lg overflow-hidden shadow-xl">
                     <img src={photoState.originalUrl} alt="Original" className="w-full h-full object-cover" />
                   </div>
@@ -205,7 +205,7 @@ const App: React.FC = () => {
                   {photoState.isProcessing ? (
                     <div className="flex flex-col items-center gap-3">
                       <div className="w-12 h-12 border-4 border-blue-100 border-t-blue-600 rounded-full animate-spin"></div>
-                      <p className="text-[10px] font-black text-blue-600 uppercase tracking-widest">AI Retouching...</p>
+                      <p className="text-[10px] font-black text-blue-600 uppercase tracking-widest">Processing 4K...</p>
                     </div>
                   ) : (
                     <div className="flex flex-col gap-2">
@@ -229,7 +229,7 @@ const App: React.FC = () => {
 
                 {photoState.editedUrl && (
                   <div className="flex flex-col items-center gap-4">
-                    <p className="text-[10px] font-black text-blue-600 uppercase tracking-widest">4K AI Result</p>
+                    <p className="text-[10px] font-black text-blue-600 uppercase tracking-widest">4K Result</p>
                     <PassportPhoto imageUrl={photoState.editedUrl} className="shadow-2xl shadow-blue-200" />
                   </div>
                 )}
@@ -238,7 +238,7 @@ const App: React.FC = () => {
               <div className="flex flex-col items-center gap-8">
                 <div className="no-print mb-4 flex items-center gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
                   <div className="flex items-center gap-3">
-                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Photo Spacing (mm)</span>
+                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Spacing (mm)</span>
                     <input 
                       type="range" 
                       min="0" 
@@ -263,5 +263,4 @@ const App: React.FC = () => {
   );
 };
 
-// Fix: Correctly export the App component to resolve import error in index.tsx
 export default App;

@@ -25,22 +25,21 @@ export const editImageWithAI = async (base64Image: string, prompt: string): Prom
           {
             text: `ACT AS A WORLD-CLASS PROFESSIONAL PHOTOGRAPHER AND RETOUCHER.
             
-            Instruction: ${prompt}.
+            USER REQUEST: ${prompt}.
             
             STRICT TECHNICAL SPECIFICATIONS:
-            1. RESOLUTION: Generate a high-quality, high-resolution output. Ensure skin textures, hair, and eyes are sharp and highly detailed.
-            2. BACKGROUND: Replace current background with a PERFECT SOLID PROFESSIONAL BLUE (Hex: #0047AB). No gradients, no shadows on background.
-            3. LIGHTING: Apply professional studio lighting (three-point lighting setup). Soften shadows on the face, ensure even brightness across forehead and cheeks.
-            4. COMPOSITION: Front-facing, eyes exactly on the horizontal center line, neutral expression, mouth closed. Crop to a standard 35mm x 45mm portrait.
-            5. COLOR: Accurate skin tones, vibrant but realistic colors, 300 DPI print-ready quality.
+            1. ASPECT RATIO & SHAPE: DO NOT alter the physical proportions of the face. DO NOT make the face thinner or wider. The subject's shape must remain EXACTLY as it is in the original photo. No distortion allowed.
+            2. RESOLUTION: Enhance to 4K ultra-high resolution. Make skin, hair, and eyes extremely sharp and clear.
+            3. BACKGROUND: Replace with a PERFECT SOLID PROFESSIONAL BLUE (Hex: #0047AB). 
+            4. LIGHTING: Keep it natural but professional. Even studio lighting without altering face geometry.
+            5. COMPOSITION: Professional passport alignment. Minimize headspace above the head.
+            
+            CRITICAL: The person must look exactly like themselves. No "slimming" filters. Just 4K quality and background removal.
             
             Return ONLY the final processed image.`,
           },
         ],
       },
-      config: {
-        // High quality generation defaults
-      }
     });
 
     // Iterate through response parts to find the image data

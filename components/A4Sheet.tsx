@@ -25,14 +25,12 @@ const A4Sheet: React.FC<A4SheetProps> = ({ imageUrl, spacing }) => {
     >
       {/* 
         Horizontal row of 6 photos.
-        Using exact 35mm width. 
-        Note: 6 * 35mm = 210mm (Exactly A4 width).
-        Any spacing > 0 will cause the row to be wider than the page.
+        Reduced paddingTop to move photos to the very top as requested.
       */}
       <div 
         className="flex justify-center items-start w-full whitespace-nowrap"
         style={{ 
-          paddingTop: '15mm',
+          paddingTop: '5mm', // Moved up from 15mm
           gap: `${spacing}mm`
         }}
       >
